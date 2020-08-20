@@ -105,23 +105,28 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
- [[ -s /usr/local/Cellar/nvm/0.35.3/nvm.sh ]] && . /usr/local/Cellar/nvm/0.35.3/nvm.sh  # This loads NVM
+[[ -s /usr/local/Cellar/nvm/0.35.3/nvm.sh ]] && . /usr/local/Cellar/nvm/0.35.3/nvm.sh  # This loads NVM
 
 
+# carta-web config
 export CARTA_HOME="$HOME/carta"
-export CARTA_WEB_HOME="$CARTA_HOME/carta-web"
-
+export CARTA_WEB_HOME="$CARTA_HOME/carta-web-local"
 source $CARTA_WEB_HOME/.cartawebrc
-
 alias cartawebconfig="vim $CARTA_WEB_HOME/.cartawebrc"
 
+# starship config
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 alias starshipconfig="vim $STARSHIP_CONFIG"
 
+# tmux config
 export TMUX_CONFIG="$HOME/.tmux.conf"
 export TMUX_CONFIG_LOCAL="$HOME/.tmux.conf.local"
 alias tmuxconfig="vim -p $TMUX_CONFIG $TMUX_CONFIG_LOCAL"
+
+# alacritty config
+export ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
+alias alacrittyconfig="vim $ALACRITTY_CONFIG"
 
 function ci() {    open https://circleci.com/gh/carta/workflows/$(basename `git rev-parse --show-toplevel`)/tree/$(echo $(git rev-parse --abbrev-ref HEAD) | sed 's/\//%2F/g')}
 alias done="echo 'Task completed in $(basename $PWD)' | terminal-notifier -sound default"
@@ -144,7 +149,6 @@ function k8s_carta_web_bash() {
 	kubectl get pods -n luiz-pericolo | rg "$BOX_NAME-carta-web-[a-z0-9]+" | rg -v "$BOX_NAME-carta-web-grpc" | tr -s " " | cut -d " " -f1 | xargs kubectl -n luiz-pericolo -c carta-web bash exec -in
 }
 
-# kubernetes aliases
 export KUBERNETES_NS='luiz-pericolo'
 alias k8s-purge-deployments="kubectl delete deployments --all --namespace $KUBERNETES_NS"
 alias k8s-purge-services="kubectl delete services --all --namespace $KUBERNETES_NS"
