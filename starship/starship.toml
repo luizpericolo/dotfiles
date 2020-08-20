@@ -5,22 +5,17 @@ add_newline = true
 [character]
 symbol = "»"
 
-#[git_branch]
-#symbol = "🌱 "
-#truncation_length = 4
-#truncation_symbol = ""
+[git_branch]
+disabled = true
 
-#[git_status]
-#conflicted = "🏳 "
-#ahead = "🏎 💨"
-#behind = "😰"
-#diverged = "😵"
-#untracked = "🤷"
-#stashed = "📦"
-#modified = "📝"
-#staged = "➕"
-#renamed = "👅"
-#deleted = "🗑 "
+[git_status]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_commit]
+disabled = true
 
 #[directory]
 #truncation_length = 8
@@ -32,4 +27,16 @@ symbol = "»"
 disabled = true
 
 [hostname]
+disabled = true
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[nodejs]
 disabled = true
